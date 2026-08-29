@@ -10,5 +10,9 @@
   },
   "dependencies": {
     "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@swc/core": "^1.16.1",
+    "unplugin-swc": "^1.5.11"
   }
 }

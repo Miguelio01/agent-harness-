@@ -93,22 +93,29 @@ rl.on('line', (line) => {
           return;
         }
 
-        const parsed = JSON.parse(rawPayload);
-        parsed.descripcion = sanitize(parsed.descripcion);
-        if (parsed.entidadPostgres && parsed.entidadPostgres.campos) {
-          parsed.entidadPostgres.campos = parsed.entidadPostgres.campos.map(c => {
-            if (c.nombre.toLowerCase().includes('nit') || c.nombre.toLowerCase().includes('email') || c.nombre.toLowerCase().includes('telefono')) {
-              c.sanitized = true;
-            }
-            return c;
-          });
+        let resultText = "";
+        try {
+          const parsed = JSON.parse(rawPayload);
+          parsed.descripcion = sanitize(parsed.descripcion);
+          if (parsed.entidadPostgres && parsed.entidadPostgres.campos) {
+            parsed.entidadPostgres.campos = parsed.entidadPostgres.campos.map(c => {
+              if (c.nombre.toLowerCase().includes('nit') || c.nombre.toLowerCase().includes('email') || c.nombre.toLowerCase().includes('telefono')) {
+                c.sanitized = true;
+              }
+              return c;
+            });
+          }
+          resultText = JSON.stringify({ success: true, data: parsed });
+        } catch (e) {
+          const sanitizedText = sanitize(rawPayload);
+          resultText = JSON.stringify({ success: true, data: sanitizedText });
         }
 
         const response = {
           jsonrpc: '2.0',
           id,
           result: {
-            content: [{ type: 'text', text: JSON.stringify({ success: true, data: parsed }) }]
+            content: [{ type: 'text', text: resultText }]
           }
         };
         process.stdout.write(JSON.stringify(response) + '\n');
