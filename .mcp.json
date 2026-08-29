@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "postgres-db": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgres",
+        "postgresql://tributos_user:tributos_password@localhost:5432/tributos_db"
+      ]
+    },
+    "security-sanitizer": {
+      "command": "node",
+      "args": [
+        "./mcp-servers/security-sanitizer.js"
+      ]
+    }
+  }
+}

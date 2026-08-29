@@ -6,6 +6,7 @@
     "setup": "bash scripts/setup.sh",
     "start:harness": "node scripts/harness-cli.js",
     "quality-check": "node scripts/quality-check.js",
+    "audit:harness": "node scripts/audit-harness.js",
     "test": "pnpm -r test"
   },
   "dependencies": {
