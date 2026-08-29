@@ -1,0 +1,24 @@
+{
+  "radicadoId": "RAD-2026-8842",
+  "tramite": "DeclaracionRetencionIca",
+  "descripcion": "Módulo para la radicación y consulta de declaraciones de retención de ICA para contribuyentes. Contactar al supervisor en supervisor@tributos.com o al +573001234567 para autorizar.",
+  "entidadPostgres": {
+    "nombreTabla": "declaraciones_ica",
+    "campos": [
+      { "nombre": "id", "tipo": "UUID", "primaryKey": true },
+      { "nombre": "nitContribuyente", "tipo": "VARCHAR(20)", "requerido": true },
+      { "nombre": "periodoGrabable", "tipo": "VARCHAR(6)", "requerido": true },
+      { "nombre": "montoRetenido", "tipo": "NUMERIC(15,2)", "requerido": true },
+      { "nombre": "estado", "tipo": "VARCHAR(15)", "default": "PENDIENTE" }
+    ]
+  },
+  "reglasNegocio": [
+    "El NIT no puede estar vacío y debe tener formato válido.",
+    "El monto retenido debe ser mayor a cero.",
+    "El estado inicial siempre debe ser PENDIENTE."
+  ],
+  "vistasAngular": [
+    "FormularioRadicacionComponent",
+    "TablaConsultaRadicadosComponent"
+  ]
+}
