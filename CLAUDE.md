@@ -4,6 +4,7 @@
 - Install and configure environment: `pnpm run setup`
 - Ingest requirement (Flow A): `pnpm run start:harness -- --input=requirements/pending/radicado.json`
 - Quality Check (Flow B Validation): `pnpm run quality-check`
+- Compliance Audit: `pnpm run audit:harness`
 
 ## Project Context
 This is an evaluation harness for Informática y Tributos S.A.S. containing Angular (Signals, Standalone) and NestJS (TypeORM, validation DTOs) workspaces with a Postgres database.
