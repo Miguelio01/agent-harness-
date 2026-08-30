@@ -99,3 +99,35 @@ CREATE TABLE declaraciones_ica (
 );
 ```
 
+## 6. Protocolo de Captura de Informacion y Persistencia Segura (ISO 27001)
+
+Para dar cumplimiento estricto a las normas de seguridad de informacion **ISO 27001** y prevenir alteraciones no autorizadas en los entornos productivos de la organizacion, el Harness implementa el siguiente protocolo de captura y persistencia:
+
+### 6.1 Principio de Segregacion de Canales y Datos
+El flujo separa categoricamente el procesamiento de lenguaje natural no estructurado del canal transaccional de escritura:
+
+1.  **Canal de Analisis (Sanitizacion por MCP):** 
+    Toda solicitud recibida en formato de texto libre es enviada al servidor MCP `security-sanitizer`. Este modulo redacta en tiempo real correos electronicos, telefonos y numeros de identificacion fiscal (NIT colombianos como `830.092.110-3` enmascarado como `[NIT_REDACTED]`), previniendo que cualquier IA de generacion de codigo o documentacion almacene o aprenda de datos sensibles en su base de conocimiento.
+2.  **Canal de Escritura (Persistencia via API):**
+    Queda terminantemente prohibido que los agentes de IA (Claude Code, OpenCode, Gemini) realicen conexiones de escritura directa sobre las tablas fisicas de PostgreSQL.
+    - El MCP `postgres-db` esta configurado con permisos exclusivos de solo lectura (`read-only transaction`).
+    - Toda operacion de registro, actualizacion o borrado debe realizarse invocando el API REST de la aplicacion (NestJS) expuesto de forma controlada en el puerto `3000`.
+
+### 6.2 Flujo Secuencial del Protocolo (Paso a Paso)
+
+```mermaid
+graph TD
+    Text[1. Requerimiento en Texto Plano] --> MCP_San[2. MCP security-sanitizer]
+    MCP_San -->|Redacta PII / NIT| SanitizedText[3. Texto Sanitizado sin PII]
+    SanitizedText --> Agent_Ext[4. Agente IA extrae variables]
+    Agent_Ext -->|Combina con datos originales recuperados| StructJSON[5. JSON Estructurado Completo]
+    StructJSON -->|Envia POST a NestJS API /declaraciones-ica| Nest_API[6. API NestJS ValidationPipe & DTO]
+    Nest_API -->|TypeORM Safe Query| PostgreSQL[(7. PostgreSQL DB)]
+```
+
+1.  **Captura por MCP:** El texto plano se analiza mediante la herramienta `sanitize_payload` del MCP, que enmascara los datos sensibles reemplazandolos con tokens redactados (`[EMAIL_REDACTED]`, `[PHONE_REDACTED]`, `[NIT_REDACTED]`).
+2.  **Mapeo e Integracion de Falsos Positivos:** El Agente extrae las variables del radicado. Si un valor numerico de negocio (como el monto monetario) es detectado como falso positivo de PII por el sanitizador, el agente lo identifica, restaura el valor original y documenta la trazabilidad en la metadata.
+3.  **Persistencia Controlada via API:** Los datos estructurados resultantes (NIT, Periodo, Monto y los contactos sanitizados) se envian mediante una peticion POST HTTP a la aplicacion NestJS.
+4.  **Validacion y Guardado:** El DTO de NestJS valida los tipos y rangos (`class-validator`), audita la transaccion e inserta de forma segura el registro en PostgreSQL.
+
+
