@@ -16,4 +16,10 @@ export class DeclaracionRetencionIcaEntity {
 
   @Column({ type: 'varchar', length: 15, default: 'PENDIENTE' })
   estado!: string;
+
+  @Column({ name: 'email_contacto', type: 'varchar', length: 100, nullable: true })
+  emailContacto?: string;
+
+  @Column({ name: 'telefono_contacto', type: 'varchar', length: 30, nullable: true })
+  telefonoContacto?: string;
 }

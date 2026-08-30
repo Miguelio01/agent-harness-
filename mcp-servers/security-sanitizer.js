@@ -10,7 +10,8 @@ const rl = readline.createInterface({
 // PII & Injection patterns
 const PII_PATTERNS = {
   email: /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g,
-  phone: /\b\+?[0-9]{7,15}\b/g
+  phone: /\b(?<![\$\d,])\+?[0-9]{7,15}(?!\.\d)\b/g,
+  nit: /\b\d{1,3}(\.\d{3}){2}-\d\b/g
 };
 
 const INJECTION_PATTERNS = [
@@ -25,6 +26,7 @@ function sanitize(text) {
   let sanitized = text;
   sanitized = sanitized.replace(PII_PATTERNS.email, '[EMAIL_REDACTED]');
   sanitized = sanitized.replace(PII_PATTERNS.phone, '[PHONE_REDACTED]');
+  sanitized = sanitized.replace(PII_PATTERNS.nit, '[NIT_REDACTED]');
   return sanitized;
 }
 
