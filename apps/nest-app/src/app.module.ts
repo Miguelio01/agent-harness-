@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DeclaracionRetencionIcaModule } from './modules/declaracion-retencion-ica/declaracion-retencion-ica.module.js';
-import { DeclaracionRetencionIcaEntity } from './modules/declaracion-retencion-ica/declaracion-retencion-ica.entity.js';
+import { DeclaracionRetencionIcaModule } from './modules/declaracion-retencion-ica/infrastructure/declaracion-retencion-ica.module.js';
+import { DeclaracionRetencionIcaEntity } from './modules/declaracion-retencion-ica/domain/declaracion-retencion-ica.entity.js';
 
 @Module({
   imports: [

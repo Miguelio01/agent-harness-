@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { DeclaracionRetencionIcaController } from './declaracion-retencion-ica.controller.js';
-import { DeclaracionRetencionIcaService } from './declaracion-retencion-ica.service.js';
+import { DeclaracionRetencionIcaService } from '../application/declaracion-retencion-ica.service.js';
 import { CreateDeclaracionDto } from './declaracion-retencion-ica.dto.js';
 
 describe('DeclaracionRetencionIcaController', () => {

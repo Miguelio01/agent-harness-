@@ -105,9 +105,15 @@ A continuacion se presenta la distribucion fisica y organizacion de los componen
 │   │   ├── src
 │   │   │   ├── app
 │   │   │   │   └── declaraciones-ica
-│   │   │   │       ├── declaraciones-ica.service.ts
-│   │   │   │       ├── formulario-radicacion.component.ts
-│   │   │   │       └── tabla-consulta.component.ts
+│   │   │   │       ├── components
+│   │   │   │       │   ├── formulario-radicacion
+│   │   │   │       │   │   ├── formulario-radicacion.component.spec.ts
+│   │   │   │       │   │   └── formulario-radicacion.component.ts
+│   │   │   │       │   └── tabla-consulta
+│   │   │   │       │       ├── tabla-consulta.component.spec.ts
+│   │   │   │       │       └── tabla-consulta.component.ts
+│   │   │   │       └── services
+│   │   │   │           └── declaraciones-ica.service.ts
 │   │   │   ├── index.html
 │   │   │   └── main.ts
 │   │   ├── tsconfig.json
@@ -115,14 +121,19 @@ A continuacion se presenta la distribucion fisica y organizacion de los componen
 │   └── nest-app
 │       ├── package.json
 │       ├── src
+│       │   ├── app.module.ts
 │       │   ├── main.ts
 │       │   └── modules
 │       │       └── declaracion-retencion-ica
-│       │           ├── declaracion-retencion-ica.controller.ts
-│       │           ├── declaracion-retencion-ica.dto.ts
-│       │           ├── declaracion-retencion-ica.entity.ts
-│       │           ├── declaracion-retencion-ica.module.ts
-│       │           └── declaracion-retencion-ica.service.ts
+│       │           ├── application
+│       │           │   └── declaracion-retencion-ica.service.ts
+│       │           ├── domain
+│       │           │   └── declaracion-retencion-ica.entity.ts
+│       │           └── infrastructure
+│       │               ├── declaracion-retencion-ica.controller.spec.ts
+│       │               ├── declaracion-retencion-ica.controller.ts
+│       │               ├── declaracion-retencion-ica.dto.ts
+│       │               └── declaracion-retencion-ica.module.ts
 │       └── tsconfig.json
 ├── db
 │   └── postgres
@@ -147,3 +158,4 @@ A continuacion se presenta la distribucion fisica y organizacion de los componen
     ├── postgres-schema-extractor.md
     └── security-sanitizer-invoker.md
 ```
+

@@ -1,8 +1,8 @@
 import 'zone.js';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { Component, importProvidersFrom } from '@angular/core';
-import { FormularioRadicacionComponent } from './app/declaraciones-ica/formulario-radicacion.component';
-import { TablaConsultaComponent } from './app/declaraciones-ica/tabla-consulta.component';
+import { FormularioRadicacionComponent } from './app/declaraciones-ica/components/formulario-radicacion/formulario-radicacion.component';
+import { TablaConsultaComponent } from './app/declaraciones-ica/components/tabla-consulta/tabla-consulta.component';
 
 @Component({
   selector: 'app-root',

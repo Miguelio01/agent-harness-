@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { DeclaracionRetencionIcaEntity } from './declaracion-retencion-ica.entity.js';
-import { CreateDeclaracionDto } from './declaracion-retencion-ica.dto.js';
+import { DeclaracionRetencionIcaEntity } from '../domain/declaracion-retencion-ica.entity.js';
+import { CreateDeclaracionDto } from '../infrastructure/declaracion-retencion-ica.dto.js';
 
 @Injectable()
 export class DeclaracionRetencionIcaService {

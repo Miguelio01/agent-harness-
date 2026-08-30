@@ -1,7 +1,7 @@
 import { Controller, Post, Get, Body } from '@nestjs/common';
-import { DeclaracionRetencionIcaService } from './declaracion-retencion-ica.service.js';
+import { DeclaracionRetencionIcaService } from '../application/declaracion-retencion-ica.service.js';
 import { CreateDeclaracionDto } from './declaracion-retencion-ica.dto.js';
-import { DeclaracionRetencionIcaEntity } from './declaracion-retencion-ica.entity.js';
+import { DeclaracionRetencionIcaEntity } from '../domain/declaracion-retencion-ica.entity.js';
 
 @Controller('declaraciones-ica')
 export class DeclaracionRetencionIcaController {

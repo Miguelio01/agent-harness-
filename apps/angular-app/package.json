@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "ng serve --port 4200",
+    "build": "ng build",
     "test": "vitest run"
   },
   "dependencies": {
