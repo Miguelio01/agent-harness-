@@ -15,7 +15,7 @@ Este repositorio contiene el framework y arnes de pruebas disenado para automati
 - Backend: NestJS v10.x en Node ESM.
 - Frontend: Angular Standalone v17.3.x con Signals y Reactive Forms.
 - TypeScript: v5.4.5 (alineada para la compatibilidad del compilador Angular 17).
-- Base de Datos: PostgreSQL v15 en Docker.
+- Base de Datos: PostgreSQL v15 en Docker (esquema ampliado con soporte de columnas sanitizadas de contacto: `email_contacto` y `telefono_contacto`).
 
 ### Inicializar el entorno (Auto-Registro Global):
 Este comando automatiza el setup completo del workspace:
@@ -73,13 +73,16 @@ El arnes incorpora la arquitectura de Model Context Protocol (MCP) para extender
 
 ### 1. Servidores MCP Incluidos:
 - **security-sanitizer (mcp-servers/security-sanitizer.js):**
-  Servidor MCP local personalizado que actua como firewall de entrada. Implementa la herramienta sanitize_payload que detecta PII (correos, numeros de telefono) e inyecciones de codigo en descripciones libres de tramites, reemplazandolos con tokens redactados antes de que la IA lea el requerimiento.
+  Servidor MCP local personalizado que actua como firewall de entrada. Implementa la herramienta `sanitize_payload` para detectar PII (correos, numeros de telefono refinados con reglas de lookahead/lookbehind para evitar falsos positivos en montos monetarios de 7 digitos o mas, y numeros de identificacion fiscal como NIT colombianos en formato `XXX.XXX.XXX-Y`), reemplazandolos con tokens redactados antes de que la IA lea el requerimiento.
 - **postgres-db (PostgreSQL Model Context Protocol Server):**
   Permite al agente inspeccionar esquemas de tablas existentes en tiempo real.
   *Principio de Minimo Privilegio (ISO 27001):* Por diseno, el canal del agente de IA esta configurado en transacciones de solo lectura (read-only transaction). El agente no puede modificar datos directamente por SQL (INSERT/DELETE), obligando a canalizar todas las escrituras a traves de las APIs controladas de la aplicacion (NestJS).
 
 ### 2. Archivo de Configuracion Global (.mcp.json):
 Contiene la declaracion y argumentos de arranque de los servidores MCP para integrarse en herramientas de desarrollo compatibles como Kiro CLI, Claude Code y OpenCode / Antigravity.
+
+### 3. Protocolo de Captura y Persistencia Seguro:
+El flujo implementa la captura segura de datos desarticulando la informacion transaccional (NIT, Periodo, Monto) y la PII (email, telefono). Para cumplir con la norma ISO 27001, la informacion de contacto desensibilizada es enviada por el agente de IA a traves del API REST (POST `/declaraciones-ica`) del backend de NestJS, el cual valida los campos (`CreateDeclaracionDto`) y los persiste de manera segura como `emailContacto` y `telefonoContacto` en PostgreSQL (almacenando los tokens `[EMAIL_REDACTED]` y `+[PHONE_REDACTED]` en la tabla, previniendo fugas de PII).
 
 ---
 
