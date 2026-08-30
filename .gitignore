@@ -6,4 +6,6 @@ build/
 .env
 .kiro/
 mcp-test-config.json
+.angular/
+
 

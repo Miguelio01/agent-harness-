@@ -1,7 +1,7 @@
 import { Component, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { DeclaracionesIcaService } from './declaraciones-ica.service.js';
+import { DeclaracionesIcaService } from './declaraciones-ica.service';
 
 @Component({
   selector: 'app-formulario-radicacion',

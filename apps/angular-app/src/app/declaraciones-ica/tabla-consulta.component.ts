@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DeclaracionesIcaService } from './declaraciones-ica.service.js';
+import { DeclaracionesIcaService } from './declaraciones-ica.service';
 
 @Component({
   selector: 'app-tabla-consulta',

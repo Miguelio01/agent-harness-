@@ -1,6 +1,6 @@
 import '@angular/compiler';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { TablaConsultaComponent } from './tabla-consulta.component.js';
+import { TablaConsultaComponent } from './tabla-consulta.component';
 import { of } from 'rxjs';
 
 describe('TablaConsultaComponent', () => {

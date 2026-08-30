@@ -1,9 +1,9 @@
 import '@angular/compiler';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { FormularioRadicacionComponent } from './formulario-radicacion.component.js';
+import { FormularioRadicacionComponent } from './formulario-radicacion.component';
 import { FormBuilder } from '@angular/forms';
 import { of } from 'rxjs';
-import { DeclaracionesIcaService } from './declaraciones-ica.service.js';
+import { DeclaracionesIcaService } from './declaraciones-ica.service';
 
 describe('FormularioRadicacionComponent', () => {
   let component: FormularioRadicacionComponent;
