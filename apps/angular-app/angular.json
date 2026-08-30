@@ -16,7 +16,7 @@
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": [],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.json",
             "assets": [],
             "styles": [],
@@ -31,5 +31,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "f369632d-ecf8-4fb8-b38e-936983d81356"
   }
 }

@@ -1,3 +1,4 @@
+import 'zone.js';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { Component, importProvidersFrom } from '@angular/core';
 import { FormularioRadicacionComponent } from './app/declaraciones-ica/formulario-radicacion.component';
