@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "setup": "bash scripts/setup.sh",
+    "setup": "bash scripts/setup.sh && node scripts/auto-register.mjs",
     "start:harness": "node scripts/harness-cli.js",
     "quality-check": "node scripts/quality-check.js",
     "audit:harness": "node scripts/audit-harness.js",

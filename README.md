@@ -17,8 +17,17 @@ Este repositorio contiene el framework y arnés de pruebas diseñado para automa
 *   **TypeScript:** `v5.4.5` (alineada para compatibilidad estricta del compilador Angular 17).
 *   **Base de Datos:** PostgreSQL `v15` en Docker.
 
-### Inicializar el entorno:
-Este comando automatiza el setup completo del workspace. Levanta el contenedor Docker `tributos-db`, ejecuta los scripts SQL de creación de tablas de auditoría, instala todas las dependencias cruzadas del monorepo y compila las configuraciones:
+### Inicializar el entorno (Auto-Registro Global):
+Este comando automatiza el setup completo del workspace:
+1. Levanta el contenedor Docker `tributos-db` y ejecuta los scripts SQL de inicialización.
+2. Instala todas las dependencias del monorepo con `pnpm`.
+3. **Protocolo de Auto-Registro Global (Zero-Config):** Ejecuta `scripts/auto-register.mjs` para registrar automáticamente nuestros 2 servidores MCP (`security-sanitizer` y `postgres-db`) y copiar las habilidades/prompts locales a los directorios de configuración de tus CLIs de IA:
+   - **Claude Code / Claude Desktop:** Registra los MCPs agregándolos a `~/.claude.json` y `~/.config/claude/config.json`.
+   - **Gemini / Antigravity CLI:** Copia las habilidades locales al repositorio de conocimiento global (`~/.gemini/skills/`).
+   - **Kiro CLI:** Importa la configuración al workspace local (`kiro-cli mcp import`).
+   - **Cursor IDE / Codex:** Crea automáticamente `.cursorrules` en la raíz del proyecto unificando las reglas locales.
+   - **OpenCode Interpreter:** Copia y estructura las directrices locales en `.opencode/rules/`.
+
 ```bash
 pnpm run setup
 ```
