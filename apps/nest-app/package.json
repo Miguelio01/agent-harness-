@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
-    "@nestjs/core": "^10.0.0",
+    "@nestjs/core": "^11.1.18",
     "@nestjs/platform-express": "^10.4.22",
     "@nestjs/typeorm": "^10.0.2",
     "class-transformer": "^0.5.1",
@@ -18,6 +18,6 @@
     "typeorm": "^0.3.20"
   },
   "devDependencies": {
-    "vitest": "^1.6.0"
+    "vitest": "^3.2.6"
   }
 }
