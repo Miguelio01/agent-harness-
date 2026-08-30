@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "tsx src/main.ts",
+    "start": "tsc && node dist/main.js",
     "test": "vitest run"
   },
   "dependencies": {
