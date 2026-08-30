@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "start": "tsx src/main.ts",
     "test": "vitest run"
   },
   "dependencies": {
