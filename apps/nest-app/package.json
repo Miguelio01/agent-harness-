@@ -9,11 +9,12 @@
   "dependencies": {
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
+    "@nestjs/platform-express": "^10.4.22",
     "@nestjs/typeorm": "^10.0.2",
-    "typeorm": "^0.3.20",
-    "class-validator": "^0.14.1",
     "class-transformer": "^0.5.1",
-    "pg": "^8.11.5"
+    "class-validator": "^0.14.1",
+    "pg": "^8.11.5",
+    "typeorm": "^0.3.20"
   },
   "devDependencies": {
     "vitest": "^1.6.0"
